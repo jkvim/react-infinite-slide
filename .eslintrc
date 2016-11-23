@@ -1,0 +1,13 @@
+{
+  "extends": "eslint-config-airbnb",
+  "env": {
+    "browser": true,
+    "node": true,
+    "jasmine": true
+  },
+  "rules": {
+    "linebreak-style": ["error", "windows"],
+    "prefer-stateless-function": [0],
+    "import/no-extraneous-dependencies": [0]
+  }
+}
