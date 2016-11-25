@@ -14,7 +14,6 @@ export default class Slides extends React.Component {
       key: 0,
       direction: 'left'
     };
-
   }
 
   initProps({ width = 600, height = 400, duration = 0, animate }) {
@@ -24,7 +23,7 @@ export default class Slides extends React.Component {
     this.animate = animate;
   }
 
-  initSlides({ width, heigth, children }) {
+  initSlides({ children }) {
     this.slides = children.map((slide, index) => {
       const style = Object.assign({
         width: this.width + 'px',
