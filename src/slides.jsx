@@ -17,11 +17,11 @@ export default class Slides extends React.Component {
 
   }
 
-  initPros({ width, height, duration, animate }) {
-    this.width = width || 600;
-    this.height = height || 400;
-    this.duration = props.duration;
-    this.animate = props.animate;
+  initProps({ width = 600, height = 400, duration = 0, animate }) {
+    this.width = width;
+    this.height = height;
+    this.duration = duration + 's';
+    this.animate = animate;
   }
 
   initSlides({ width, heigth, children }) {
@@ -73,7 +73,7 @@ export default class Slides extends React.Component {
     if (skipToFirstSlide || skipToLastSlide) {
       this.duration = '0s';
     } else {
-      this.duration = this.props.duration;
+      this.duration = this.props.duration + 's';
     }
   }
 
@@ -144,13 +144,8 @@ export default class Slides extends React.Component {
     }
   }
 
-  render() {
-    const {
-      arrowLeft: ArrowLeft,
-      arrowRight: ArrowRight,
-      dots: Dots
-    } = this.props;
-    const style = {
+  getStyle() {
+    return {
       container: {
         overflow: 'hidden',
         position: 'relative',
@@ -166,6 +161,15 @@ export default class Slides extends React.Component {
         `,
       }
     };
+  }
+
+  render() {
+    const {
+      arrowLeft: ArrowLeft,
+      arrowRight: ArrowRight,
+      dots: Dots
+    } = this.props;
+    const style = this.getStyle();
     const activeDot = this.getActiveDot();
     return (
       <div className="react-infinite-slides container" style={style.container}>
