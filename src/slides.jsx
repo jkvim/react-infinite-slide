@@ -2,9 +2,8 @@ import React from 'react';
 
 export default class Slides extends React.Component {
   constructor(props) {
-    super();
-    this.width = props.width || 600;
-    this.height = props.height || 400;
+    super(props);
+    this.initProps(props);
     this.initSlides(props);
     this.bindHanlders([
       'onSlideLeft',
@@ -15,11 +14,17 @@ export default class Slides extends React.Component {
       key: 0,
       direction: 'left'
     };
+
+  }
+
+  initPros({ width, height, duration, animate }) {
+    this.width = width || 600;
+    this.height = height || 400;
     this.duration = props.duration;
     this.animate = props.animate;
   }
 
-  initSlides({ children }) {
+  initSlides({ width, heigth, children }) {
     this.slides = children.map((slide, index) => {
       const style = Object.assign({
         width: this.width + 'px',
@@ -39,6 +44,17 @@ export default class Slides extends React.Component {
       key: -1,
       className: 'tail'
     });
+  }
+
+  componentDidMount() {
+    const { autoplay, delay = 1000 } = this.props;
+    const loop = () => {
+      this.onSlideRight();
+      setTimeout(loop.bind(this), delay);
+    };
+    if (autoplay) {
+      setTimeout(loop.bind(this), delay);
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -170,4 +186,10 @@ export default class Slides extends React.Component {
 
 Slides.propTypes = {
   children: React.PropTypes.arrayOf(React.PropTypes.element),
+  width: React.PropTypes.number,
+  height: React.PropTypes.number,
+  animate: React.PropTypes.string,
+  delay: React.PropTypes.number,
+  duration: React.PropTypes.number,
+  autoplay: React.PropTypes.bool
 };
