@@ -1,46 +1,34 @@
-import React from 'React';
+import React from 'react';
 
 export default class Slides extends React.Component {
   constructor(props) {
-    super(this);
-    const slides = this.initSlides(props);
+    super();
+    this.width = props.width || 600;
+    this.height = props.height || 400;
+    this.initSlides(props);
     this.bindHanlders([
       'onSlideLeft',
       'onSlideRight',
       'onDotsClick'
     ]);
-    this.bindComponents([
-      {
-        element: props.arrowLeft,
-        target: 'arrowLeft',
-        handler: this.onSlideLeft
-      },
-      {
-        element: props.arrowRight,
-        target: 'arrowRight',
-        handler: this.onSlideRight
-      },
-      {
-        element: props.dots,
-        target: 'dots',
-        handler: this.onDotsClick
-      }
-    ]);
     this.state = {
-      slides,
+      key: 0
     };
   }
 
-  initSlides({ width = 600, height = 400, animate = 'ease-in', duration = 0.5, children }) {
-    return children.map((slide, index) => {
-      const style = {
+  initSlides({ animate = 'ease-in', duration = 0.5, children }) {
+    this.slides = children.map((slide, index) => {
+      if (index === children.length - 1) {
+        index = -1; // move the last one slide to -1 position
+      } 
+      const style = Object.assign({
         position: 'absolute',
         top: '0',
-        left: (index * width) + 'px',
-        width: width + 'px',
-        height: height + 'px',
+        left: (index * this.width) + 'px',
+        width: this.width + 'px',
+        height: this.height + 'px',
         transition: `left ${duration}s ${animate}`,
-      };
+      }, slide.props.style);
       return React.cloneElement(slide, {
         style,
         key: index
@@ -48,9 +36,9 @@ export default class Slides extends React.Component {
     });
   }
 
-  updateSlides() {
-    return this.state.slides.map((slide, index) => {
-      const style = slide.props.style;
+  updateSlides(slides) {
+    return slides.map((slide, index) => {
+      const style = Object.assign({}, slide.props.style);
       style.left = index * parseInt(slide.props.style.width) + 'px';
       return React.cloneElement(slide, {
         style
@@ -60,56 +48,64 @@ export default class Slides extends React.Component {
 
   bindHanlders(handlers) {
     handlers.forEach((handler) => {
-      this[handlers] = this[handler].bind(this);
-    });
-  }
-
-  bindComponents(components) {
-    components.forEach((component) => {
-      const { element, target, handler } = component;
-      if (element) {
-        this[target] = handler;
-      }
+      this[handler] = this[handler].bind(this);
     });
   }
 
   onSlideLeft() {
+    console.log('slide left');
     this.setState({
-      slides: [
-        ...this.state.slides.slice(1),
-        this.state.slides[0]
-      ]
+      key: (this.state.key + 1) % this.slides.length
     });
+    this.slides = this.updateSlides([
+      ...this.slides.slice(1),
+      this.slides[0]
+    ]);
   }
 
   onSlideRight() {
+    console.log('slide right');
     this.setState({
-      slides: [
-        this.state.slides[this.state.slides.length - 1],
-        ...this.state.slides.slice(0, this.state.slides.length - 1)
-      ]
-    })
+      key: (this.state.key - 1)
+    });
+    this.slides = this.updateSlides([
+      this.slides[this.slides.length - 1],
+      ...this.slides.slice(0, this.slides.length - 1)
+    ]);
   }
 
   onDotsClick(key) {
-   if (key < this.state.slides.length && key > 0) {
-     this.setState({
-       slides: [
-         ...this.state.slides.slice(key),
-         ...this.state.slides.slice(0, key)
-       ]
-     });
-   }
+    if (key < this.slides.length && key > 0) {
+      this.setState({
+        key
+      });
+      this.slides = this.updateSlides([
+        ...this.slides.slice(key),
+        ...this.slides.slice(0, key)
+      ]);
+    }
   }
 
   render() {
-    const slides = this.updateSlides(this.state.slides);
+    const {
+      arrowLeft: ArrowLeft,
+      arrowRight: ArrowRight,
+      dots: Dots
+    } = this.props;
+    const style = {
+      position: 'relative',
+      width: this.width + 'px',
+      height: this.height + 'px',
+      overflow: 'hidden',
+    };
     return (
-      <div className="react-infinite-slides" style={{position: 'relative'}}>
-        {this.arrowLeft}
-        {this.arrowRight}
-        {slides}
-        {this.dots}
+      <div className="react-infinite-slides" style={style}>
+        <ArrowLeft onClick={this.onSlideLeft} />
+        <ArrowRight onClick={this.onSlideRight} />
+        <Dots activeDot={this.state.key}
+          length={this.slides.length}
+          onDotsClick={this.onDotsClick} />
+        {this.slides}
       </div>
     );
   }
@@ -117,7 +113,4 @@ export default class Slides extends React.Component {
 
 Slides.propTypes = {
   children: React.PropTypes.arrayOf(React.PropTypes.element),
-  arrowLeft: React.PropTypes.element,
-  arrowRight: React.PropTypes.element,
-  dots: React.Props.element,
 };
