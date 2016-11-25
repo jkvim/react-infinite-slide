@@ -12,38 +12,70 @@ export default class Slides extends React.Component {
       'onDotsClick'
     ]);
     this.state = {
-      key: 0
+      key: 0,
+      direction: 'left'
     };
+    this.duration = props.duration;
+    this.animate = props.animate;
   }
 
-  initSlides({ animate = 'ease-in', duration = 0.5, children }) {
+  initSlides({ children }) {
     this.slides = children.map((slide, index) => {
-      if (index === children.length - 1) {
-        index = -1; // move the last one slide to -1 position
-      } 
       const style = Object.assign({
-        position: 'absolute',
-        top: '0',
-        left: (index * this.width) + 'px',
         width: this.width + 'px',
         height: this.height + 'px',
-        transition: `left ${duration}s ${animate}`,
+        flexShrink: 0,
       }, slide.props.style);
       return React.cloneElement(slide, {
         style,
         key: index
       });
     });
+    this.head = React.cloneElement(this.slides[this.slides.length - 1], {
+      key: this.slides.length,
+      className: 'head'
+    });
+    this.tail = React.cloneElement(this.slides[0], {
+      key: -1,
+      className: 'tail'
+    });
   }
 
-  updateSlides(slides) {
-    return slides.map((slide, index) => {
-      const style = Object.assign({}, slide.props.style);
-      style.left = index * parseInt(slide.props.style.width) + 'px';
-      return React.cloneElement(slide, {
-        style
-      });
-    });
+  componentWillUpdate(nextProps, nextState) {
+    const { key, direction } = nextState;
+    const skipToLastSlide = (
+      direction === 'left' &&
+      this.state.key === -1 &&
+      key === this.slides.length - 1
+    );
+    const skipToFirstSlide = (
+      key === 0 &&
+      direction === 'right' &&
+      this.state.key === this.slides.length
+    )
+
+    if (skipToFirstSlide || skipToLastSlide) {
+      this.duration = '0s';
+    } else {
+      this.duration = this.props.duration;
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { key } = prevState;
+    const { direction } = this.state;
+    const slideLeftAtHead = (key === -1) && direction === 'left';
+    const slideRightAtTail = (key === this.slides.length) && direction === 'right';
+    if (slideLeftAtHead) {
+      setTimeout(() => {
+        this.onSlideLeft();
+      }, 0);
+    }
+    if (slideRightAtTail) {
+      setTimeout(() => {
+        this.onSlideRight();
+      }, 0);
+    }
   }
 
   bindHanlders(handlers) {
@@ -52,39 +84,51 @@ export default class Slides extends React.Component {
     });
   }
 
+
   onSlideLeft() {
-    console.log('slide left');
+    let key = this.state.key === - 1 ?
+      this.slides.length - 1 :
+      this.state.key - 1;
+
     this.setState({
-      key: (this.state.key + 1) % this.slides.length
+      key,
+      direction: 'left'
     });
-    this.slides = this.updateSlides([
-      ...this.slides.slice(1),
-      this.slides[0]
-    ]);
   }
 
   onSlideRight() {
-    console.log('slide right');
+    let key = this.state.key === this.slides.length ?
+      0 : this.state.key + 1;
+
     this.setState({
-      key: (this.state.key - 1)
+      key,
+      direction: 'right'
     });
-    this.slides = this.updateSlides([
-      this.slides[this.slides.length - 1],
-      ...this.slides.slice(0, this.slides.length - 1)
-    ]);
   }
 
   onDotsClick(key) {
-    if (key < this.slides.length && key > 0) {
+    if (key >= 0 &&
+      key !== this.state.key &&
+      key < this.slides.length) {
+      const direction = key > this.state.key ? 'right' : 'left';
       this.setState({
-        key
+        key,
+        direction
       });
-      this.slides = this.updateSlides([
-        ...this.slides.slice(key),
-        ...this.slides.slice(0, key)
-      ]);
     }
   }
+
+  getActiveDot() {
+    switch (this.state.key) {
+      case -1:
+        return this.slides.length - 1;
+      case this.slides.length:
+        return 0;
+      default:
+        return this.state.key;
+    }
+  }
+
 
   render() {
     const {
@@ -93,19 +137,34 @@ export default class Slides extends React.Component {
       dots: Dots
     } = this.props;
     const style = {
-      position: 'relative',
-      width: this.width + 'px',
-      height: this.height + 'px',
-      overflow: 'hidden',
+      container: {
+        overflow: 'hidden',
+        position: 'relative',
+        width: this.width + 'px',
+        height: this.height + 'px',
+      },
+      wrapper: {
+        display: 'flex',
+        transitionDuration: this.duration,
+        transitionTimingFunction: this.animate,
+        transform: `
+          translate3d(${-this.width * (this.state.key + 1)}px, 0px, 0px)
+        `,
+      }
     };
+    const activeDot = this.getActiveDot();
     return (
-      <div className="react-infinite-slides" style={style}>
-        <ArrowLeft onClick={this.onSlideLeft} />
-        <ArrowRight onClick={this.onSlideRight} />
-        <Dots activeDot={this.state.key}
+      <div className="react-infinite-slides container" style={style.container}>
+        {ArrowLeft ? <ArrowLeft onClick={this.onSlideLeft} /> : null}
+        {ArrowRight ? <ArrowRight onClick={this.onSlideRight} /> : null}
+        {Dots ? <Dots activeDot={activeDot}
           length={this.slides.length}
-          onDotsClick={this.onDotsClick} />
-        {this.slides}
+          onDotsClick={this.onDotsClick} /> : null}
+        <div className="react-infinite-slides wrapper" style={style.wrapper}>
+          {this.head}
+          {this.slides}
+          {this.tail}
+        </div>
       </div>
     );
   }
