@@ -9,6 +9,7 @@ module.exports = {
   output: {
     filename: './bundle.js',
   },
+  devtools: '#eval',
   devServer: {
     hot: true,
     inline: true,
