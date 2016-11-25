@@ -1,3 +1,6 @@
 {
   "extends": "react",
+  "rules": {
+    "indent": 2
+  }
 }
