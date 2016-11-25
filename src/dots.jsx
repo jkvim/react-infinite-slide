@@ -11,7 +11,6 @@ export default class Dots extends React.Component {
 
   getDots() {
     const dots = [];
-    console.log(this.props.activeDot)
     for (let i = 0; i < this.props.length || 0; i++) {
       const style = {
         width: '5px',
@@ -23,7 +22,7 @@ export default class Dots extends React.Component {
       };
 
       if (i === this.props.activeDot) {
-        style.background = 'rgba(0, 0, 0, 1)';
+        style.background = '#FFFFFF';
       }
 
       dots.push(
