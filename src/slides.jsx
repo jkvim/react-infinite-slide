@@ -84,7 +84,6 @@ export default class Slides extends React.Component {
     });
   }
 
-
   onSlideLeft() {
     let key = this.state.key === - 1 ?
       this.slides.length - 1 :
@@ -128,7 +127,6 @@ export default class Slides extends React.Component {
         return this.state.key;
     }
   }
-
 
   render() {
     const {
