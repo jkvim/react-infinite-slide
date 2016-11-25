@@ -11,12 +11,12 @@ function App() {
       <Slides arrowLeft={ArrowLeft}
               arrowRight={ArrowRight}
               dots={Dots}
-              duration='0.3s'
+              duration={0.3}
               autoplay
       >
         <div className="one" style={{background: 'green'}}></div>
         <div className="two" style={{background: 'red'}}></div>
-       
+        <div className="three" style={{background: 'yellow'}}></div>
       </Slides>
     </div>
   )
