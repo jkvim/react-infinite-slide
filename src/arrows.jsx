@@ -10,7 +10,8 @@ function Arrow({ direction, onClick }) {
       textAlign: 'center',
       background: 'rgba(0, 0, 0, 0.6)',
       boxSizing: 'border-box',
-      zIndex: 1
+      zIndex: 1,
+      marginTop: '-20px',
     },
     arrow: {
       width: '12px',
