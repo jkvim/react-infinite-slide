@@ -2,18 +2,23 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    'webpack-dev-server/client?http://localhost:8080/',
-    'webpack/hot/dev-server',
-    path.resolve(__dirname, 'index.jsx')],
+  entry: {
+    bundle: [
+      'webpack-dev-server/client?http://localhost:8080/',
+      'webpack/hot/dev-server',
+      path.resolve(__dirname + '/example', 'index.jsx')
+    ],
+  },
   output: {
-    filename: './bundle.js',
+    path: path.resolve(__dirname, "exmaple"),
+    filename: '[name].js',
   },
   devtools: '#eval',
   devServer: {
     hot: true,
     inline: true,
     port: 8080,
+    contentBase: "./example",
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
