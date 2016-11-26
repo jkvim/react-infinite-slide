@@ -10,7 +10,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, "exmaple"),
+    path: path.resolve(__dirname, "example"),
     filename: '[name].js',
   },
   devtools: '#eval',
