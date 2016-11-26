@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { ArrowLeft, ArrowRight } from './src/arrows';
-import Dots from './src/dots';
-import Slides from './src/slides';
+import { ArrowLeft, ArrowRight, Dots, Slides } from '../src';
 
 function App() {
   return (
@@ -12,7 +10,7 @@ function App() {
               arrowRight={ArrowRight}
               dots={Dots}
               duration={0.3}
-              autoplay
+              
       >
         <div className="one" style={{background: 'green'}}></div>
         <div className="two" style={{background: 'red'}}></div>
