@@ -83,3 +83,6 @@ class Dots extends React.Component {
 
 ## Demo
 [react-infinite-slide-demo](http://jkvim.github.io/react-infinite-slide)
+
+## Todo
+- [ ] adapt mobile
