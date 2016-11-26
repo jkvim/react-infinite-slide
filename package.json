@@ -8,11 +8,13 @@
     "url": "git@github.com:jkvim/react-infinite-slide.git"
   },
   "bin": {
-    "webpack": "./bin/webpack"
+    "webpack": "./bin/webpack",
+    "gulp": "./bin/gulp"
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.develop.config.js",
-    "build": "set NODE_ENV=production && webpack --config webpack.product.config.js -p --optimize-dedupe"
+    "build": "set NODE_ENV=production && webpack --config webpack.product.config.js -p --optimize-dedupe",
+    "depoly": "gulp depoly"
   },
   "keywords": [
     "react",
@@ -44,6 +46,9 @@
     "react-hot-loader": "^3.0.0-beta.4",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
+    "webpack-stream": "^3.2.0",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.1",
     "webpack-dev-server": "^1.16.1",
