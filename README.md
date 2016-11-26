@@ -12,7 +12,6 @@ The slides wrapper
 |------------|--------------------------------------|-----------------|---------|
 | width      | width of wrapper and slides          | Number          | 600     |
 | height     | height of wrapper and slides         | Number          | 400     |
-| animate    | transition timing function           | String          | null    |
 | duration   | transition duration                  | Number          | null    |
 | autoplay   | should autoplay the slides           | Bool            | false   |
 | delay      | the autoplay delay of between slides | Number          | 1000    |

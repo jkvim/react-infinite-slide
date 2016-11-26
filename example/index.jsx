@@ -9,7 +9,8 @@ function App() {
       <Slides arrowLeft={ArrowLeft}
               arrowRight={ArrowRight}
               dots={Dots}
-              duration={0.3}
+              duration={0.5}
+              width={600}
               
       >
         <div className="one" style={{background: 'green'}}></div>

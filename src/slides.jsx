@@ -16,11 +16,10 @@ export default class Slides extends React.Component {
     };
   }
 
-  initProps({ width = 600, height = 400, duration = 0, animate }) {
+  initProps({ width = 600, height = 400, duration = 0 }) {
     this.width = width;
     this.height = height;
     this.duration = duration + 's';
-    this.animate = animate;
   }
 
   initSlides({ children }) {
@@ -154,7 +153,6 @@ export default class Slides extends React.Component {
       wrapper: {
         display: 'flex',
         transitionDuration: this.duration,
-        transitionTimingFunction: this.animate,
         transform: `
           translate3d(${-this.width * (this.state.key + 1)}px, 0px, 0px)
         `,
@@ -191,7 +189,6 @@ Slides.propTypes = {
   children: React.PropTypes.arrayOf(React.PropTypes.element),
   width: React.PropTypes.number,
   height: React.PropTypes.number,
-  animate: React.PropTypes.string,
   delay: React.PropTypes.number,
   duration: React.PropTypes.number,
   autoplay: React.PropTypes.bool
