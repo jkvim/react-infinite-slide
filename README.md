@@ -1,6 +1,14 @@
 # React infinite slide
 > if you just want infinite slider, this is for you
 
+[![Build Status](https://travis-ci.org/jkvim/react-infinite-slide.svg?branch=master)](https://travis-ci.org/jkvim/react-infinite-slide.js)
+[![NPM version][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
+
+[npm-url]: https://npmjs.org/package/react-infinite-slide
+[downloads-image]: http://img.shields.io/npm/dm/react-infinite-slide.svg
+[npm-image]: http://img.shields.io/npm/v/react-infinite-slide.svg
+
 # Feature
 - swipe support
 - autopaly
