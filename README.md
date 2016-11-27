@@ -52,9 +52,9 @@ function App() {
 ```
 
 ### `ArrowLeft`
-Default left arrow Component, pass to `<Slides />` as props of `arrowLeft`,
-you can custom your `ArrowLeft` component and pass it to `<Slides />`,
-`<Slides />` will pass `onClick` to it, and you **MUST** call `props.onClick` 
+This default left arrow component, you can pass it to `Slides` as 
+props of `arrowLeft`, or you can custom your `ArrowLeft` component,
+`Slides` will inject `onClick` as props, and you **MUST** call it
 when arrow is be clicked. 
 
 **Example**
@@ -67,14 +67,17 @@ function ArrowLeft({ onClick }) {
 ``` 
 
 ### `ArrowRight`
-Default right arrow Component, pass to `<Slides />` as props of `arrowRight`,
-you can custom your `ArrowRight` component like [ArrowLeft](#`ArrowLeft`)
+This default right arrow component, you can pass it to `Slides` as 
+props of `arrowRight`, or you can custom your `ArrowRight` component 
+like [ArrowLeft](#arrowleft)
 
 
-### `<Dots />`
-Default dots Component, pass to `<Slides />` as props of `dots`, you can
-custom your `Dots` component and pass it to `<Slides />`, `<Slides />` will pass
-`onDotsClick` to it and you **MUST** call `props.onDotsClick(key)` when dot is be clicked.
+### `Dots`
+This default dots component, you can pass it to `Slides` as props of `dots`,
+or you can custom your `Dots` component, `Slides` will inject `onDotsClick` to
+it and you **MUST** call `props.onDotsClick(key)` when dot is be clicked. parameter
+`key` is the index of the slide, like below example
+
 
 **Example**
 ```jsx
