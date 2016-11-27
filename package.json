@@ -39,6 +39,8 @@
     "eslint": "^3.5.0",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-react": "^6.7.1",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
     "node-sass": "^3.10.1",
     "open-browser-webpack-plugin": "0.0.2",
     "react": "latest",
@@ -46,12 +48,13 @@
     "react-hot-loader": "^3.0.0-beta.4",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "gulp": "^3.9.1",
-    "gulp-gh-pages": "^0.5.4",
-    "webpack-stream": "^3.2.0",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.1",
     "webpack-dev-server": "^1.16.1",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-hot-middleware": "^2.12.2",
+    "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+    "react-addons-css-transition-group": "^15.4.1"
   }
 }

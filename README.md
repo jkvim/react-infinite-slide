@@ -12,7 +12,7 @@ The slides wrapper
 |------------|--------------------------------------|-----------------|---------|
 | width      | width of wrapper and slides          | String          | "600px" |
 | height     | height of wrapper and slides         | String          | "400px" |
-| duration   | transition duration                  | Number          | null    |
+| duration   | transition duration                  | Number          | 300     |
 | autoplay   | should autoplay the slides           | Bool            | false   |
 | delay      | the autoplay delay of between slides | Number          | 1000    |
 | arrowLeft  | the left arrow component constructor | ReactComponent  | null    |

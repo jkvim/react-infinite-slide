@@ -16,14 +16,14 @@ export default class Slides extends React.Component {
     };
   }
 
-  initProps({ width = "600px", height = "400px", duration = 0 }) {
+  initProps({ width = "600px", height = "400px", duration = 300 }) {
     const regex = /[0-9]+(px|%)$/;
     if (!regex.test(width) || !regex.test(height)) {
       throw TypeError('invalid width or height');
     }
     this.width = width;
     this.height = height;
-    this.duration = duration + 's';
+    this.duration = duration + 'ms';
   }
 
   initSlides({ children }) {
@@ -74,7 +74,7 @@ export default class Slides extends React.Component {
     if (skipToFirstSlide || skipToLastSlide) {
       this.duration = '0s';
     } else {
-      this.duration = this.props.duration + 's';
+      this.duration = this.props.duration + 'ms';
     }
   }
 
@@ -148,7 +148,7 @@ export default class Slides extends React.Component {
         overflow: 'hidden',
         position: 'relative',
         width: this.width,
-        height: this.height + 'px',
+        height: this.height,
       },
       wrapper: {
         display: 'flex',
