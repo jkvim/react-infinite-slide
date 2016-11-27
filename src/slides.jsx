@@ -16,7 +16,11 @@ export default class Slides extends React.Component {
     };
   }
 
-  initProps({ width = 600, height = 400, duration = 0 }) {
+  initProps({ width = "600px", height = "400px", duration = 0 }) {
+    const regex = /[0-9]+(px|%)$/;
+    if (!regex.test(width) || !regex.test(height)) {
+      throw TypeError('invalid width or height');
+    }
     this.width = width;
     this.height = height;
     this.duration = duration + 's';
@@ -25,8 +29,8 @@ export default class Slides extends React.Component {
   initSlides({ children }) {
     this.slides = children.map((slide, index) => {
       const style = Object.assign({
-        width: this.width + 'px',
-        height: this.height + 'px',
+        width: this.width,
+        height: this.height,
         flexShrink: 0,
       }, slide.props.style);
       return React.cloneElement(slide, {
@@ -67,7 +71,6 @@ export default class Slides extends React.Component {
       direction === 'right' &&
       this.state.key === this.slides.length
     )
-
     if (skipToFirstSlide || skipToLastSlide) {
       this.duration = '0s';
     } else {
@@ -80,16 +83,13 @@ export default class Slides extends React.Component {
     const { direction } = this.state;
     const slideLeftAtHead = (key === -1) && direction === 'left';
     const slideRightAtTail = (key === this.slides.length) && direction === 'right';
-    if (slideLeftAtHead) {
-      setTimeout(() => {
-        this.onSlideLeft();
-      }, 0);
-    }
-    if (slideRightAtTail) {
-      setTimeout(() => {
-        this.onSlideRight();
-      }, 0);
-    }
+    const doSlideAfterSkip = (flag, slideFn) => {
+      if (flag) {
+        setTimeout(() => slideFn.call(this), 0);
+      }
+    };
+    doSlideAfterSkip(slideLeftAtHead, this.onSlideLeft);
+    doSlideAfterSkip(slideRightAtTail, this.onSlideRight);
   }
 
   bindHanlders(handlers) {
@@ -147,15 +147,13 @@ export default class Slides extends React.Component {
       container: {
         overflow: 'hidden',
         position: 'relative',
-        width: this.width + 'px',
+        width: this.width,
         height: this.height + 'px',
       },
       wrapper: {
         display: 'flex',
         transitionDuration: this.duration,
-        transform: `
-          translate3d(${-this.width * (this.state.key + 1)}px, 0px, 0px)
-        `,
+        transform: `translateX(${100 * -(this.state.key + 1)}%)`,
       }
     };
   }
@@ -169,13 +167,15 @@ export default class Slides extends React.Component {
     const style = this.getStyle();
     const activeDot = this.getActiveDot();
     return (
-      <div className="react-infinite-slides container" style={style.container}>
+      <div className="react-infinite-slides container"
+           style={style.container}>
         {ArrowLeft ? <ArrowLeft onClick={this.onSlideLeft} /> : null}
         {ArrowRight ? <ArrowRight onClick={this.onSlideRight} /> : null}
         {Dots ? <Dots activeDot={activeDot}
-          length={this.slides.length}
-          onDotsClick={this.onDotsClick} /> : null}
-        <div className="react-infinite-slides wrapper" style={style.wrapper}>
+                      length={this.slides.length}
+                      onDotsClick={this.onDotsClick} /> : null}
+        <div className="react-infinite-slides wrapper" 
+              style={style.wrapper}>
           {this.head}
           {this.slides}
           {this.tail}
@@ -187,8 +187,8 @@ export default class Slides extends React.Component {
 
 Slides.propTypes = {
   children: React.PropTypes.arrayOf(React.PropTypes.element),
-  width: React.PropTypes.number,
-  height: React.PropTypes.number,
+  width: React.PropTypes.string,
+  height: React.PropTypes.string,
   delay: React.PropTypes.number,
   duration: React.PropTypes.number,
   autoplay: React.PropTypes.bool
