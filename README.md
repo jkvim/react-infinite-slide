@@ -11,7 +11,7 @@
 [npm-image]: http://img.shields.io/npm/v/react-infinite-slide.svg
 [licence-image]: 	https://img.shields.io/npm/l/react-infinite-slide.svg
 
-# Feature
+## Feature
 - swipe support
 - autopaly
 - alow custom arrow and dots
