@@ -19,6 +19,7 @@ export default class Dots extends React.Component {
         borderRadius: '50%',
         display: 'inline-block',
         background: 'rgba(0, 0, 0, 0.3)',
+        padding: '2px'
       };
 
       if (i === this.props.activeDot) {
