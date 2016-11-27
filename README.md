@@ -1,5 +1,10 @@
 # React infinite slide
-> you can play your slides as a infinite loop
+> if you just want infinite slider, this is for you
+
+# Feature
+- swipe support
+- autopaly
+- alow custom arrow and dots
 
 ## Install
     npm install react-infinite-slide
@@ -89,5 +94,5 @@ class Dots extends React.Component {
 [react-infinite-slide-demo](http://jkvim.github.io/react-infinite-slide)
 
 ## Todo
-- [ ] add touch support
+- [x] add touch support
 - [ ] fix bug of transition overlap
