@@ -54,7 +54,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _src = __webpack_require__(178);
+	var _reactGithubCorner = __webpack_require__(178);
+
+	var _reactGithubCorner2 = _interopRequireDefault(_reactGithubCorner);
+
+	var _src = __webpack_require__(180);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,17 +67,54 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(
-	      _src.Slides,
-	      { arrowLeft: _src.ArrowLeft,
-	        arrowRight: _src.ArrowRight,
-	        dots: _src.Dots,
-	        duration: 0.5,
-	        width: 600
-
-	      },
-	      _react2.default.createElement('div', { className: 'one', style: { background: 'green' } }),
-	      _react2.default.createElement('div', { className: 'two', style: { background: 'red' } }),
-	      _react2.default.createElement('div', { className: 'three', style: { background: 'yellow' } })
+	      'header',
+	      null,
+	      _react2.default.createElement(_reactGithubCorner2.default, { href: 'https://github.com/jkvim/react-infinite-slide' }),
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'React Infinite Slide'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'section',
+	      null,
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'Slide By Arrow'
+	      ),
+	      _react2.default.createElement(
+	        _src.Slides,
+	        { arrowLeft: _src.ArrowLeft,
+	          arrowRight: _src.ArrowRight,
+	          dots: _src.Dots,
+	          duration: 300,
+	          width: '100%' },
+	        _react2.default.createElement('div', { className: 'one', style: { background: '#bdff70' } }),
+	        _react2.default.createElement('div', { className: 'two', style: { background: '#f09bfd' } }),
+	        _react2.default.createElement('div', { className: 'three', style: { background: '#ffa500' } })
+	      ),
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'Slide By Auto'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'section',
+	      null,
+	      _react2.default.createElement(
+	        _src.Slides,
+	        { dots: _src.Dots,
+	          duration: 300,
+	          width: '100%',
+	          autoplay: true,
+	          delay: 2000 },
+	        _react2.default.createElement('div', { className: 'one', style: { background: '#bdff70' } }),
+	        _react2.default.createElement('div', { className: 'two', style: { background: '#f09bfd' } }),
+	        _react2.default.createElement('div', { className: 'three', style: { background: '#ffa500' } })
+	      )
 	    )
 	  );
 	}
@@ -21507,15 +21548,163 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _styles = __webpack_require__(179);
+
+	var _styles2 = _interopRequireDefault(_styles);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var githubCornerStyleId = '____GITHUB_CORNER_SUPER_SECRET___';
+	var githubCornerStyles = (0, _styles2.default)();
+
+	/**
+	 * A react component based off of:
+	 *   https://github.com/tholman/github-corners
+	 *
+	 * @class GithubCorner
+	 * @extends React.Component
+	 * @example
+	 * <GithubCorner href="http://skratchdot.com/" />
+	 */
+
+	var GithubCorner = function (_Component) {
+	  _inherits(GithubCorner, _Component);
+
+	  function GithubCorner() {
+	    _classCallCheck(this, GithubCorner);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GithubCorner).apply(this, arguments));
+	  }
+
+	  _createClass(GithubCorner, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (!document.getElementById(githubCornerStyleId)) {
+	        var head = document.head || document.getElementsByTagName('head')[0];
+	        var style = document.createElement('style');
+	        style.type = 'text/css';
+	        style.id = githubCornerStyleId;
+	        if (style.styleSheet) {
+	          style.styleSheet.cssText = githubCornerStyles;
+	        } else {
+	          style.appendChild(document.createTextNode(githubCornerStyles));
+	        }
+	        head.appendChild(style);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var href = _props.href;
+	      var width = _props.width;
+	      var height = _props.height;
+	      var direction = _props.direction;
+	      var octoColor = _props.octoColor;
+	      var bannerColor = _props.bannerColor;
+
+	      var mainStyle = {
+	        position: 'absolute',
+	        top: 0,
+	        fill: octoColor
+	      };
+	      var armStyle = {};
+	      var pathBanner = '';
+	      var pathArm = '';
+	      var pathBody = '';
+	      if (direction === 'left') {
+	        pathBanner = 'M250 0L135 115h-15l-12 27L0 250V0z';
+	        pathArm = 'M122 109c15-9 9-19 9-19-3-7-2-11-2-11 1-7-3-2-3-2-4 5-2 11-2 11 3 10-5 15-9 16';
+	        pathBody = 'M135 115s-4 2-5 0l-14-14c-3-2-6-3-8-3 8-11 15-24-2-41-5-5-10-7-16-7-1-2-3-7-12-11 0 0-5 3-7 16-4 2-8 5-12 9s-7 8-9 12c-14 4-17 9-17 9 4 8 9 11 11 11 0 6 2 11 7 16 16 16 30 10 41 2 0 3 1 7 5 11l12 11c1 2-1 6-1 6z';
+	        mainStyle.left = 0;
+	        armStyle.webkitTransformOrigin = '120px 144px';
+	        armStyle.transformOrigin = '120px 144px';
+	      } else {
+	        pathBanner = 'M0 0l115 115h15l12 27 108 108V0z';
+	        pathArm = 'M128 109c-15-9-9-19-9-19 3-7 2-11 2-11-1-7 3-2 3-2 4 5 2 11 2 11-3 10 5 15 9 16';
+	        pathBody = 'M115 115s4 2 5 0l14-14c3-2 6-3 8-3-8-11-15-24 2-41 5-5 10-7 16-7 1-2 3-7 12-11 0 0 5 3 7 16 4 2 8 5 12 9s7 8 9 12c14 3 17 7 17 7-4 8-9 11-11 11 0 6-2 11-7 16-16 16-30 10-41 2 0 3-1 7-5 11l-12 11c-1 1 1 5 1 5z';
+	        mainStyle.right = 0;
+	        armStyle.WebkitTransformOrigin = '130px 106px';
+	        armStyle.transformOrigin = '130px 106px';
+	      }
+	      return _react2.default.createElement(
+	        'a',
+	        { href: href, className: 'github-corner' },
+	        _react2.default.createElement(
+	          'svg',
+	          { width: width, height: height, viewBox: '0 0 250 250', style: mainStyle },
+	          _react2.default.createElement('path', { className: 'octo-banner', d: pathBanner, fill: bannerColor }),
+	          _react2.default.createElement('path', { className: 'octo-arm', d: pathArm, style: armStyle }),
+	          _react2.default.createElement('path', { className: 'octo-body', d: pathBody })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return GithubCorner;
+	}(_react.Component);
+
+	exports.default = GithubCorner;
+
+
+	GithubCorner.defaultProps = {
+	  href: '/',
+	  width: 80,
+	  height: 80,
+	  direction: 'right',
+	  octoColor: '#fff',
+	  bannerColor: '#151513'
+	};
+	//# sourceMappingURL=GithubCorner.js.map
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = getGithubCornerStyles;
+	function getGithubCornerStyles() {
+	  return "\n.github-corner:hover .octo-arm {\n  animation: octocat-wave 560ms ease-in-out;\n}\n\n@keyframes octocat-wave {\n  0% {\n    transform: rotate(0deg);\n  }\n\n  20% {\n    transform: rotate(-25deg);\n  }\n\n  40% {\n    transform: rotate(10deg);\n  }\n\n  60% {\n   transform: rotate(-25deg);\n  }\n\n  80% {\n    transform: rotate(10deg);\n  }\n\n  100% {\n    transform: rotate(0deg);\n  }\n}\n\n@media (max-width: 500px) {\n    .github-corner:hover .octo-arm {\n        animation: none;\n    }\n\n    .github-corner .octo-arm {\n        animation: octocat-wave 560ms ease-in-out;\n    }\n}\n";
+	}
+	//# sourceMappingURL=styles.js.map
+
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.ArrowRight = exports.ArrowLeft = exports.Slides = exports.Dots = undefined;
 
-	var _arrows = __webpack_require__(179);
+	var _arrows = __webpack_require__(181);
 
-	var _dots = __webpack_require__(180);
+	var _dots = __webpack_require__(182);
 
 	var _dots2 = _interopRequireDefault(_dots);
 
-	var _slides = __webpack_require__(181);
+	var _slides = __webpack_require__(183);
 
 	var _slides2 = _interopRequireDefault(_slides);
 
@@ -21536,7 +21725,7 @@
 	;
 
 /***/ },
-/* 179 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21624,7 +21813,7 @@
 	;
 
 /***/ },
-/* 180 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21678,7 +21867,8 @@
 	          margin: '0 10px',
 	          borderRadius: '50%',
 	          display: 'inline-block',
-	          background: 'rgba(0, 0, 0, 0.3)'
+	          background: 'rgba(0, 0, 0, 0.3)',
+	          padding: '2px'
 	        };
 
 	        if (i === this.props.activeDot) {
@@ -21741,7 +21931,7 @@
 	;
 
 /***/ },
-/* 181 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21755,6 +21945,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _alloyfinger = __webpack_require__(184);
+
+	var _alloyfinger2 = _interopRequireDefault(_alloyfinger);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21774,7 +21968,7 @@
 
 	    _this.initProps(props);
 	    _this.initSlides(props);
-	    _this.bindHanlders(['onSlideLeft', 'onSlideRight', 'onDotsClick']);
+	    _this.bindHanlders(['onSlideLeft', 'onSlideRight', 'onDotsClick', 'onSwipe']);
 	    _this.state = {
 	      key: 0,
 	      direction: 'left'
@@ -21786,15 +21980,19 @@
 	    key: 'initProps',
 	    value: function initProps(_ref) {
 	      var _ref$width = _ref.width,
-	          width = _ref$width === undefined ? 600 : _ref$width,
+	          width = _ref$width === undefined ? "600px" : _ref$width,
 	          _ref$height = _ref.height,
-	          height = _ref$height === undefined ? 400 : _ref$height,
+	          height = _ref$height === undefined ? "400px" : _ref$height,
 	          _ref$duration = _ref.duration,
-	          duration = _ref$duration === undefined ? 0 : _ref$duration;
+	          duration = _ref$duration === undefined ? 300 : _ref$duration;
 
+	      var regex = /[0-9]+(px|%)$/;
+	      if (!regex.test(width) || !regex.test(height)) {
+	        throw TypeError('invalid width or height');
+	      }
 	      this.width = width;
 	      this.height = height;
-	      this.duration = duration + 's';
+	      this.duration = duration + 'ms';
 	    }
 	  }, {
 	    key: 'initSlides',
@@ -21805,8 +22003,8 @@
 
 	      this.slides = children.map(function (slide, index) {
 	        var style = Object.assign({
-	          width: _this2.width + 'px',
-	          height: _this2.height + 'px',
+	          width: _this2.width,
+	          height: _this2.height,
 	          flexShrink: 0
 	        }, slide.props.style);
 	        return _react2.default.cloneElement(slide, {
@@ -21840,6 +22038,12 @@
 	      if (autoplay) {
 	        setTimeout(loop.bind(this), delay);
 	      }
+
+	      if (this.container) {
+	        new _alloyfinger2.default(this.container, {
+	          swipe: this.onSwipe
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'componentWillUpdate',
@@ -21849,11 +22053,10 @@
 
 	      var skipToLastSlide = direction === 'left' && this.state.key === -1 && key === this.slides.length - 1;
 	      var skipToFirstSlide = key === 0 && direction === 'right' && this.state.key === this.slides.length;
-
 	      if (skipToFirstSlide || skipToLastSlide) {
 	        this.duration = '0s';
 	      } else {
-	        this.duration = this.props.duration + 's';
+	        this.duration = this.props.duration + 'ms';
 	      }
 	    }
 	  }, {
@@ -21866,16 +22069,15 @@
 
 	      var slideLeftAtHead = key === -1 && direction === 'left';
 	      var slideRightAtTail = key === this.slides.length && direction === 'right';
-	      if (slideLeftAtHead) {
-	        setTimeout(function () {
-	          _this4.onSlideLeft();
-	        }, 0);
-	      }
-	      if (slideRightAtTail) {
-	        setTimeout(function () {
-	          _this4.onSlideRight();
-	        }, 0);
-	      }
+	      var doSlideAfterSkip = function doSlideAfterSkip(flag, slideFn) {
+	        if (flag) {
+	          setTimeout(function () {
+	            return slideFn.call(_this4);
+	          }, 0);
+	        }
+	      };
+	      doSlideAfterSkip(slideLeftAtHead, this.onSlideLeft);
+	      doSlideAfterSkip(slideRightAtTail, this.onSlideRight);
 	    }
 	  }, {
 	    key: 'bindHanlders',
@@ -21918,6 +22120,23 @@
 	      }
 	    }
 	  }, {
+	    key: 'onSwipe',
+	    value: function onSwipe(evt) {
+	      var direction = evt.direction.toLowerCase();
+	      switch (direction) {
+	        case 'left':
+	          {
+	            this.onSlideRight();
+	            break;
+	          }
+	        case 'right':
+	          {
+	            this.onSlideLeft();
+	            break;
+	          }
+	      }
+	    }
+	  }, {
 	    key: 'getActiveDot',
 	    value: function getActiveDot() {
 	      switch (this.state.key) {
@@ -21936,19 +22155,21 @@
 	        container: {
 	          overflow: 'hidden',
 	          position: 'relative',
-	          width: this.width + 'px',
-	          height: this.height + 'px'
+	          width: this.width,
+	          height: this.height
 	        },
 	        wrapper: {
 	          display: 'flex',
 	          transitionDuration: this.duration,
-	          transform: '\n          translate3d(' + -this.width * (this.state.key + 1) + 'px, 0px, 0px)\n        '
+	          transform: 'translateX(' + 100 * -(this.state.key + 1) + '%)'
 	        }
 	      };
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this6 = this;
+
 	      var _props2 = this.props,
 	          ArrowLeft = _props2.arrowLeft,
 	          ArrowRight = _props2.arrowRight,
@@ -21958,7 +22179,11 @@
 	      var activeDot = this.getActiveDot();
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'react-infinite-slides container', style: style.container },
+	        { className: 'react-infinite-slides container',
+	          style: style.container,
+	          ref: function ref(c) {
+	            return _this6.container = c;
+	          } },
 	        ArrowLeft ? _react2.default.createElement(ArrowLeft, { onClick: this.onSlideLeft }) : null,
 	        ArrowRight ? _react2.default.createElement(ArrowRight, { onClick: this.onSlideRight }) : null,
 	        Dots ? _react2.default.createElement(Dots, { activeDot: activeDot,
@@ -21966,7 +22191,8 @@
 	          onDotsClick: this.onDotsClick }) : null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'react-infinite-slides wrapper', style: style.wrapper },
+	          { className: 'react-infinite-slides wrapper',
+	            style: style.wrapper },
 	          this.head,
 	          this.slides,
 	          this.tail
@@ -21984,8 +22210,8 @@
 
 	Slides.propTypes = {
 	  children: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.element),
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
+	  width: _react2.default.PropTypes.string,
+	  height: _react2.default.PropTypes.string,
 	  delay: _react2.default.PropTypes.number,
 	  duration: _react2.default.PropTypes.number,
 	  autoplay: _react2.default.PropTypes.bool
@@ -22003,6 +22229,220 @@
 	}();
 
 	;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* AlloyFinger v0.1.3
+	 * By dntzhang
+	 * Github: https://github.com/AlloyTeam/AlloyFinger
+	 */
+	; (function () {
+	    function getLen(v) {
+	        return Math.sqrt(v.x * v.x + v.y * v.y);
+	    }
+
+	    function dot(v1, v2) {
+	        return v1.x * v2.x + v1.y * v2.y;
+	    }
+
+	    function getAngle(v1, v2) {
+	        var mr = getLen(v1) * getLen(v2);
+	        if (mr === 0) return 0;
+	        var r = dot(v1, v2) / mr;
+	        if (r > 1) r = 1;
+	        return Math.acos(r);
+	    }
+
+	    function cross(v1, v2) {
+	        return v1.x * v2.y - v2.x * v1.y;
+	    }
+
+	    function getRotateAngle(v1, v2) {
+	        var angle = getAngle(v1, v2);
+	        if (cross(v1, v2) > 0) {
+	            angle *= -1;
+	        }
+
+	        return angle * 180 / Math.PI;
+	    }
+
+	    var AlloyFinger = function (el, option) {
+
+	        this.element = typeof el == 'string' ? document.querySelector(el) : el;
+
+	        this.element.addEventListener("touchstart", this.start.bind(this), false);
+	        this.element.addEventListener("touchmove", this.move.bind(this), false);
+	        this.element.addEventListener("touchend", this.end.bind(this), false);
+	        this.element.addEventListener("touchcancel", this.cancel.bind(this), false);
+
+	        this.preV = { x: null, y: null };
+	        this.pinchStartLen = null;
+	        this.scale = 1;
+	        this.isDoubleTap = false;
+
+	        var noop = function () { };
+
+	        this.rotate = option.rotate || noop;
+	        this.touchStart = option.touchStart || noop;
+	        this.multipointStart = option.multipointStart || noop;
+	        this.multipointEnd = option.multipointEnd || noop;
+	        this.pinch = option.pinch || noop;
+	        this.swipe = option.swipe || noop;
+	        this.tap = option.tap || noop;
+	        this.doubleTap = option.doubleTap || noop;
+	        this.longTap = option.longTap || noop;
+	        this.singleTap = option.singleTap || noop;
+	        this.pressMove = option.pressMove || noop;
+	        this.touchMove = option.touchMove || noop;
+	        this.touchEnd = option.touchEnd || noop;
+	        this.touchCancel = option.touchCancel || noop;
+
+	        this.delta = null;
+	        this.last = null;
+	        this.now = null;
+	        this.tapTimeout = null;
+	        this.touchTimeout = null;
+	        this.longTapTimeout = null;
+	        this.swipeTimeout = null;
+	        this.x1 = this.x2 = this.y1 = this.y2 = null;
+	        this.preTapPosition = { x: null, y: null };
+	    };
+
+	    AlloyFinger.prototype = {
+	        start: function (evt) {
+	            if (!evt.touches) return;
+	            this.now = Date.now();
+	            this.x1 = evt.touches[0].pageX;
+	            this.y1 = evt.touches[0].pageY;
+	            this.delta = this.now - (this.last || this.now);
+	            this.touchStart(evt);
+	            if (this.preTapPosition.x !== null) {
+	                this.isDoubleTap = (this.delta > 0 && this.delta <= 250 && Math.abs(this.preTapPosition.x - this.x1) < 30 && Math.abs(this.preTapPosition.y - this.y1) < 30);
+	            }
+	            this.preTapPosition.x = this.x1;
+	            this.preTapPosition.y = this.y1;
+	            this.last = this.now;
+	            var preV = this.preV,
+	                len = evt.touches.length;
+	            if (len > 1) {
+	                this._cancelLongTap();
+	                var v = { x: evt.touches[1].pageX - this.x1, y: evt.touches[1].pageY - this.y1 };
+	                preV.x = v.x;
+	                preV.y = v.y;
+	                this.pinchStartLen = getLen(preV);
+	                this.multipointStart(evt);
+	            }
+	            this.longTapTimeout = setTimeout(function () {
+	                this.longTap(evt);
+	            }.bind(this), 750);
+	        },
+	        move: function (evt) {
+	            if (!evt.touches) return;
+	            var preV = this.preV,
+	                len = evt.touches.length,
+	                currentX = evt.touches[0].pageX,
+	                currentY = evt.touches[0].pageY;
+	            this.isDoubleTap = false;
+	            if (len > 1) {
+	                var v = { x: evt.touches[1].pageX - currentX, y: evt.touches[1].pageY - currentY };
+
+	                if (preV.x !== null) {
+	                    if (this.pinchStartLen > 0) {
+	                        evt.scale = getLen(v) / this.pinchStartLen;
+	                        this.pinch(evt);
+	                    }
+
+	                    evt.angle = getRotateAngle(v, preV);
+	                    this.rotate(evt);
+	                }
+	                preV.x = v.x;
+	                preV.y = v.y;
+	            } else {
+	                if (this.x2 !== null) {
+	                    evt.deltaX = currentX - this.x2;
+	                    evt.deltaY = currentY - this.y2;
+
+	                } else {
+	                    evt.deltaX = 0;
+	                    evt.deltaY = 0;
+	                }
+	                this.pressMove(evt);
+	            }
+
+	            this.touchMove(evt);
+
+	            this._cancelLongTap();
+	            this.x2 = currentX;
+	            this.y2 = currentY;
+	            if (evt.touches.length > 1) {
+	                this._cancelLongTap();
+	                evt.preventDefault();
+	            }
+	        },
+	        end: function (evt) {
+	            if (!evt.changedTouches) return;
+	            this._cancelLongTap();
+	            var self = this;
+	            if (evt.touches.length < 2) {
+	                this.multipointEnd(evt);
+	            }
+	            this.touchEnd(evt);
+	            //swipe
+	            if ((this.x2 && Math.abs(this.x1 - this.x2) > 30) ||
+	                (this.y2 && Math.abs(this.preV.y - this.y2) > 30)) {
+	                evt.direction = this._swipeDirection(this.x1, this.x2, this.y1, this.y2);
+	                this.swipeTimeout = setTimeout(function () {
+	                    self.swipe(evt);
+
+	                }, 0)
+	            } else {
+	                this.tapTimeout = setTimeout(function () {
+	                    self.tap(evt);
+	                    // trigger double tap immediately
+	                    if (self.isDoubleTap) {
+	                        self.doubleTap(evt);
+	                        clearTimeout(self.touchTimeout);
+	                        self.isDoubleTap = false;
+	                    } else {
+	                        self.touchTimeout = setTimeout(function () {
+	                            self.singleTap(evt);
+	                        }, 250);
+	                    }
+	                }, 0)
+	            }
+
+	            this.preV.x = 0;
+	            this.preV.y = 0;
+	            this.scale = 1;
+	            this.pinchStartLen = null;
+	            this.x1 = this.x2 = this.y1 = this.y2 = null;
+	        },
+	        cancel: function (evt) {
+	            clearTimeout(this.touchTimeout);
+	            clearTimeout(this.tapTimeout);
+	            clearTimeout(this.longTapTimeout);
+	            clearTimeout(this.swipeTimeout);
+	            this.touchCancel(evt);
+	        },
+	        _cancelLongTap: function () {
+	            clearTimeout(this.longTapTimeout);
+	        },
+	        _swipeDirection: function (x1, x2, y1, y2) {
+	            return Math.abs(x1 - x2) >= Math.abs(y1 - y2) ? (x1 - x2 > 0 ? 'Left' : 'Right') : (y1 - y2 > 0 ? 'Up' : 'Down')
+	        }
+
+
+	    };
+
+	    if (true) {
+	        module.exports = AlloyFinger;
+	    } else {
+	        window.AlloyFinger = AlloyFinger;
+	    }
+	})();
+
 
 /***/ }
 /******/ ]);
