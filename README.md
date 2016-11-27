@@ -1,13 +1,15 @@
 # React infinite slide
-> if you just want infinite slider, this is for you
+> if you just want infinite slider, this is is for you
 
 [![Build Status](https://travis-ci.org/jkvim/react-infinite-slide.svg?branch=master)](https://travis-ci.org/jkvim/react-infinite-slide.js)
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
+[![Licence][licence-image]][npm-url]
 
 [npm-url]: https://npmjs.org/package/react-infinite-slide
 [downloads-image]: http://img.shields.io/npm/dm/react-infinite-slide.svg
 [npm-image]: http://img.shields.io/npm/v/react-infinite-slide.svg
+[licence-image]: 	https://img.shields.io/npm/l/react-infinite-slide.svg
 
 # Feature
 - swipe support
@@ -52,7 +54,7 @@ function App() {
 ```
 
 ### `ArrowLeft`
-This default left arrow component, you can pass it to `Slides` as 
+This is default left arrow component, you can pass it to `Slides` as 
 props of `arrowLeft`, or you can custom your `ArrowLeft` component,
 `Slides` will inject `onClick` as props, and you **MUST** call it
 when arrow is be clicked. 
@@ -67,13 +69,13 @@ function ArrowLeft({ onClick }) {
 ``` 
 
 ### `ArrowRight`
-This default right arrow component, you can pass it to `Slides` as 
+This is default right arrow component, you can pass it to `Slides` as 
 props of `arrowRight`, or you can custom your `ArrowRight` component 
 like [ArrowLeft](#arrowleft)
 
 
 ### `Dots`
-This default dots component, you can pass it to `Slides` as props of `dots`,
+This is default dots component, you can pass it to `Slides` as props of `dots`,
 or you can custom your `Dots` component, `Slides` will inject `onDotsClick` to
 it and you **MUST** call `props.onDotsClick(key)` when dot is be clicked. parameter
 `key` is the index of the slide, like below example
@@ -84,16 +86,16 @@ it and you **MUST** call `props.onDotsClick(key)` when dot is be clicked. parame
 class Dots extends React.Component {
   onClick(key) {
     return () => {
-        this.props.onDotsClick(key)
+        this is.props.onDotsClick(key)
     }
   }
 
   render() {
     return (
       <ul>
-        <li key="1" onClick=this.onClick(1)></li>
-        <li key="2" onClick=this.onClick(2)></li>
-        <li key="3" onClick=this.onClick(3)></li>
+        <li key="1" onClick=this is.onClick(1)></li>
+        <li key="2" onClick=this is.onClick(2)></li>
+        <li key="3" onClick=this is.onClick(3)></li>
       </ul>
     );
   }
