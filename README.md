@@ -10,8 +10,8 @@ The slides wrapper
 
 | props      | description                          | type            | default |
 |------------|--------------------------------------|-----------------|---------|
-| width      | width of wrapper and slides          | Number          | 600     |
-| height     | height of wrapper and slides         | Number          | 400     |
+| width      | width of wrapper and slides          | String          | "600px" |
+| height     | height of wrapper and slides         | String          | "400px" |
 | duration   | transition duration                  | Number          | null    |
 | autoplay   | should autoplay the slides           | Bool            | false   |
 | delay      | the autoplay delay of between slides | Number          | 1000    |
@@ -23,15 +23,20 @@ The slides wrapper
 ```jsx
 import { ArrowLeft, ArrowRight, Dots, Slides } from 'react-infinite-slide';
 
-<Slides arrowLeft={ArrowLeft}
+function App() {
+  return (
+    <Slides arrowLeft={ArrowLeft}
         arrowRight={ArrowRight}
         dots={Dots}
         duration={0.3}
->
-  <div className="one" style={{background: 'green'}}></div>
-  <div className="two" style={{background: 'red'}}></div>
-  <div className="three" style={{background: 'yellow'}}></div>
-</Sildes>
+    >
+     <div className="one"></div>
+     <div className="two"></div>
+     <div className="three"></div>
+   </Sildes>
+  );
+}
+
 ```
 
 ### `ArrowLeft`
@@ -85,4 +90,5 @@ class Dots extends React.Component {
 [react-infinite-slide-demo](http://jkvim.github.io/react-infinite-slide)
 
 ## Todo
-- [ ] adapt mobile
+- [ ] add touch support
+- [ ] fix bug of transition overlap
