@@ -2,7 +2,7 @@
   "name": "react-infinite-slide",
   "version": "0.0.1",
   "description": "react slide component",
-  "main": "index.jsx",
+  "main": "react-infinite-slide.min.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:jkvim/react-infinite-slide.git"
@@ -13,8 +13,9 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.develop.config.js",
-    "build": "set NODE_ENV=production && webpack --config webpack.product.config.js -p --optimize-dedupe",
-    "depoly": "gulp depoly"
+    "build": "set NODE_ENV=production && webpack --config webpack.product.config.js -p",
+    "depoly": "gulp depoly",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "react",
@@ -55,6 +56,6 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
-    "react-addons-css-transition-group": "^15.4.1"
+    "alloyfinger": "^0.1.3"
   }
 }
