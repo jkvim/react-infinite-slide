@@ -26,10 +26,9 @@ import { ArrowLeft, ArrowRight, Dots, Slides } from 'react-infinite-slide';
 function App() {
   return (
     <Slides arrowLeft={ArrowLeft}
-        arrowRight={ArrowRight}
-        dots={Dots}
-        duration={0.3}
-    >
+            arrowRight={ArrowRight}
+            dots={Dots}
+            duration={0.3}>
      <div className="one"></div>
      <div className="two"></div>
      <div className="three"></div>
@@ -49,7 +48,7 @@ when arrow is be clicked.
 ```jsx
 function ArrowLeft({ onClick }) {
   return (
-      <div onClick={onClick></div>
+    <div onClick={onClick></div>
   )
 }
 ``` 
