@@ -9,7 +9,8 @@ export default class Slides extends React.Component {
     this.bindHanlders([
       'onSlideLeft',
       'onSlideRight',
-      'onDotsClick'
+      'onDotsClick',
+      'onSwipe'
     ]);
     this.state = {
       key: 0,
@@ -60,21 +61,8 @@ export default class Slides extends React.Component {
     }
 
     if (this.container) {
-      const alloyFinger = new AlloyFinger(this.container, {
-        swipe: (evt) => {
-          const direction = evt.direction.toLowerCase();
-          console.log(direction)
-          switch (direction) {
-            case 'left': {
-              this.onSlideRight();
-              break;
-            }
-            case 'right': {
-              this.onSlideLeft();
-              break;
-            }
-          }
-        }
+      new AlloyFinger(this.container, {
+        swipe: this.onSwipe
       });
     }
   }
@@ -151,6 +139,20 @@ export default class Slides extends React.Component {
     }
   }
 
+  onSwipe(evt) {
+    const direction = evt.direction.toLowerCase();
+    switch (direction) {
+      case 'left': {
+        this.onSlideRight();
+        break;
+      }
+      case 'right': {
+        this.onSlideLeft();
+        break;
+      }
+    }
+  }
+
   getActiveDot() {
     switch (this.state.key) {
       case -1:
@@ -196,7 +198,7 @@ export default class Slides extends React.Component {
                       length={this.slides.length}
                       onDotsClick={this.onDotsClick} /> : null}
         <div className="react-infinite-slides wrapper" 
-              style={style.wrapper}>
+             style={style.wrapper}>
           {this.head}
           {this.slides}
           {this.tail}
