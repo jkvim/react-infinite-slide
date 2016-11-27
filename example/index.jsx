@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import GithubCorner from 'react-github-corner';
 import { ArrowLeft, ArrowRight, Dots, Slides } from '../src';
 
 
@@ -8,10 +8,11 @@ function App() {
   return (
     <div>
       <header>
+        <GithubCorner href="https://github.com/jkvim/react-infinite-slide" />
         <h1>React Infinite Slide</h1>
       </header>
       <section>
-        <h2>Slide By Hand</h2>
+        <h2>Slide By Arrow</h2>
         <Slides arrowLeft={ArrowLeft}
                 arrowRight={ArrowRight}
                 dots={Dots}

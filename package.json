@@ -46,6 +46,7 @@
     "open-browser-webpack-plugin": "0.0.2",
     "react": "latest",
     "react-dom": "latest",
+    "react-github-corner": "^0.3.0",
     "react-hot-loader": "^3.0.0-beta.4",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
