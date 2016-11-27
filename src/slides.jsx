@@ -1,4 +1,5 @@
 import React from 'react';
+import AlloyFinger from 'alloyfinger';
 
 export default class Slides extends React.Component {
   constructor(props) {
@@ -56,6 +57,25 @@ export default class Slides extends React.Component {
     };
     if (autoplay) {
       setTimeout(loop.bind(this), delay);
+    }
+
+    if (this.container) {
+      const alloyFinger = new AlloyFinger(this.container, {
+        swipe: (evt) => {
+          const direction = evt.direction.toLowerCase();
+          console.log(direction)
+          switch (direction) {
+            case 'left': {
+              this.onSlideRight();
+              break;
+            }
+            case 'right': {
+              this.onSlideLeft();
+              break;
+            }
+          }
+        }
+      });
     }
   }
 
@@ -168,7 +188,8 @@ export default class Slides extends React.Component {
     const activeDot = this.getActiveDot();
     return (
       <div className="react-infinite-slides container"
-           style={style.container}>
+           style={style.container}
+           ref={(c) => this.container = c}>
         {ArrowLeft ? <ArrowLeft onClick={this.onSlideLeft} /> : null}
         {ArrowRight ? <ArrowRight onClick={this.onSlideRight} /> : null}
         {Dots ? <Dots activeDot={activeDot}
