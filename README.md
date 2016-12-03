@@ -43,7 +43,7 @@ function App() {
     <Slides arrowLeft={ArrowLeft}
             arrowRight={ArrowRight}
             dots={Dots}
-            duration={0.3}>
+            duration={300}>
      <div className="one"></div>
      <div className="two"></div>
      <div className="three"></div>
