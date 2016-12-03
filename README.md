@@ -16,6 +16,9 @@
 - autopaly
 - alow custom arrow and dots
 
+## Demo
+[react-infinite-slide-demo](http://jkvim.github.io/react-infinite-slide)
+
 ## Install
     npm install react-infinite-slide
 
@@ -101,10 +104,6 @@ class Dots extends React.Component {
   }
 }
 ```
-
-
-## Demo
-[react-infinite-slide-demo](http://jkvim.github.io/react-infinite-slide)
 
 ## Todo
 - [x] add touch support
