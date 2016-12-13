@@ -127,7 +127,8 @@ export default class Slides extends React.Component {
     });
   }
 
-  onDotsClick(key) {
+  onDotsClick(index) {
+    const key = parseInt(index, 10);
     if (key >= 0 &&
       key !== this.state.key &&
       key < this.slides.length) {
@@ -190,15 +191,25 @@ export default class Slides extends React.Component {
     const activeDot = this.getActiveDot();
     return (
       <div className="react-infinite-slides container"
-           style={style.container}
-           ref={(c) => this.container = c}>
-        {ArrowLeft ? <ArrowLeft onClick={this.onSlideLeft} /> : null}
-        {ArrowRight ? <ArrowRight onClick={this.onSlideRight} /> : null}
-        {Dots ? <Dots activeDot={activeDot}
-                      length={this.slides.length}
-                      onDotsClick={this.onDotsClick} /> : null}
-        <div className="react-infinite-slides wrapper" 
-             style={style.wrapper}>
+        style={style.container}
+        ref={(c) => {this.container = c;}}>
+        {
+          ArrowLeft ?
+            <ArrowLeft onClick={this.onSlideLeft} /> : null
+        }
+        {
+          ArrowRight ?
+            <ArrowRight onClick={this.onSlideRight} /> : null
+        }
+        {
+          Dots ?
+            <Dots activeDot={activeDot}
+              length={this.slides.length}
+              onDotsClick={this.onDotsClick}
+              onClick={this.onDotsClick} /> : null
+        }
+        <div className="react-infinite-slides wrapper"
+          style={style.wrapper}>
           {this.head}
           {this.slides}
           {this.tail}

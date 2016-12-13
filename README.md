@@ -79,9 +79,9 @@ like [ArrowLeft](#arrowleft)
 
 ### `Dots`
 This is default dots component, you can pass it to `Slides` as props of `dots`,
-or you can custom your `Dots` component, `Slides` will inject `onDotsClick` to
-it and you **MUST** call `props.onDotsClick(key)` when dot is be clicked. parameter
-`key` is the index of the slide, like below example
+or you can custom your `Dots` component, `Slides` will inject `onClick` to
+it and you **MUST** call `props.onClick(index)` when dot is be clicked. parameter
+`index` is the index of the slide, *SHOULD* start from 0, like below example
 
 
 **Example**
@@ -89,16 +89,16 @@ it and you **MUST** call `props.onDotsClick(key)` when dot is be clicked. parame
 class Dots extends React.Component {
   onClick(key) {
     return () => {
-        this is.props.onDotsClick(key)
+        this is.props.onClick(key)
     }
   }
 
   render() {
     return (
       <ul>
-        <li key="1" onClick=this is.onClick(1)></li>
-        <li key="2" onClick=this is.onClick(2)></li>
-        <li key="3" onClick=this is.onClick(3)></li>
+        <li key="0" onClick=this.onClick(1)></li>
+        <li key="1" onClick=this.onClick(2)></li>
+        <li key="2" onClick=this.onClick(3)></li>
       </ul>
     );
   }
@@ -106,5 +106,4 @@ class Dots extends React.Component {
 ```
 
 ## Todo
-- [x] add touch support
 - [ ] fix bug of transition overlap
