@@ -3,10 +3,13 @@ import React from 'react';
 export default class Dots extends React.Component {
   onClick(key) {
     return () => {
-      if (typeof this.props.onDotsClick === 'function') {
-        this.props.onDotsClick(key)
+
+      if (typeof this.props.onClick === 'function' ||
+        typeof this.props.onDotsClick === 'function') {
+        const onClick = this.props.onClick || this.props.onDotsClick;
+        onClick(key);
       }
-    }
+    };
   }
 
   getDots() {
