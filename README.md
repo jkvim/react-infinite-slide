@@ -96,9 +96,9 @@ class Dots extends React.Component {
   render() {
     return (
       <ul>
-        <li key="0" onClick=this.onClick(1)></li>
-        <li key="1" onClick=this.onClick(2)></li>
-        <li key="2" onClick=this.onClick(3)></li>
+        <li key="0" onClick=this.onClick(0)></li>
+        <li key="1" onClick=this.onClick(1)></li>
+        <li key="2" onClick=this.onClick(2)></li>
       </ul>
     );
   }
