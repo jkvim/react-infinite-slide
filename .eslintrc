@@ -1,6 +1,15 @@
 {
   "extends": "react",
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "rules": {
-    "indent": 2
+     "indent": ["error", 2],
+     "no-unused-expressions": [0]
+  },
+  "globals": {
+    "describe": true,
+    "it": true
   }
 }
