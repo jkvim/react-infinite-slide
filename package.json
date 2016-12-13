@@ -7,10 +7,6 @@
     "type": "git",
     "url": "git@github.com:jkvim/react-infinite-slide.git"
   },
-  "bin": {
-    "webpack": "./bin/webpack",
-    "gulp": "./bin/gulp"
-  },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.develop.config.js",
     "build": "set NODE_ENV=production && webpack --config webpack.product.config.js -p",
