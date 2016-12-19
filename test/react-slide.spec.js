@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 import { ArrowLeft, ArrowRight } from '../src/arrows';
 import Dots from '../src/dots';
-import Slides from '../src/Slides';
+import Slides from '../src/slides';
 import 'jsdom-global/register';
 
 
