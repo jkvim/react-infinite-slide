@@ -26,16 +26,16 @@
 ### `Slides`
 The slides wrapper
 
-| props      | description                          | type            | default |
-|------------|--------------------------------------|-----------------|---------|
-| width      | width of wrapper and slides          | String          | "600px" |
-| height     | height of wrapper and slides         | String          | "400px" |
-| duration   | transition duration                  | Number          | 300     |
-| autoplay   | should autoplay the slides           | Bool            | false   |
-| delay      | the autoplay delay of between slides | Number          | 1000    |
-| arrowLeft  | the left arrow component constructor | ReactComponent  | null    |
-| arrowRight | the right arrow compnent constructor | ReactComponent  | null    |
-| dots       | the dots component constructor       | React Component | null    |
+| props      | description                                           | type            | default |
+|------------|-------------------------------------------------------|-----------------|---------|
+| width      | width of wrapper and slides, use "px" or "%" as unit  | String          | "600px" |
+| height     | height of wrapper and slides, use "px" or "%" as unit | String          | "400px" |
+| duration   | transition duration                                   | Number          | 300     |
+| autoplay   | should autoplay the slides                            | Bool            | false   |
+| delay      | the autoplay delay of between slides                  | Number          | 1000    |
+| arrowLeft  | the left arrow component constructor                  | ReactComponent  | null    |
+| arrowRight | the right arrow compnent constructor                  | ReactComponent  | null    |
+| dots       | the dots component constructor                        | React Component | null    |
 
 **Example**
 ```jsx
@@ -46,7 +46,8 @@ function App() {
     <Slides arrowLeft={ArrowLeft}
             arrowRight={ArrowRight}
             dots={Dots}
-            duration={300}>
+            duration={300}
+            width="100%">
      <div className="one"></div>
      <div className="two"></div>
      <div className="three"></div>
