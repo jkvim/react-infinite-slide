@@ -60,6 +60,7 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
-    "alloyfinger": "^0.1.3"
+    "alloyfinger": "^0.1.3",
+    "prop-types": "^15.5.10"
   }
 }
