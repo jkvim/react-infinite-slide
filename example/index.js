@@ -4,7 +4,7 @@ import GithubCorner from 'react-github-corner';
 import { ArrowLeft, ArrowRight, Dots, Slides } from '../src';
 
 
-function App() {
+function App () {
   return (
     <div>
       <header>
@@ -18,9 +18,9 @@ function App() {
                 dots={Dots}
                 duration={300}
                 width="100%">
-          <div className="one" style={{background: '#bdff70'}}></div>
-          <div className="two" style={{background: '#f09bfd'}}></div>
-          <div className="three" style={{background: '#ffa500'}}></div>
+          <div className="one" style={{ background: '#bdff70' }} />
+          <div className="two" style={{ background: '#f09bfd' }} />
+          <div className="three" style={{ background: '#ffa500' }} />
         </Slides>
         <h2>Slide By Auto</h2>
       </section>
@@ -30,9 +30,9 @@ function App() {
                 width="100%"
                 autoplay
                 delay={2000}>
-          <div className="one" style={{background: '#bdff70'}}></div>
-          <div className="two" style={{background: '#f09bfd'}}></div>
-          <div className="three" style={{background: '#ffa500'}}></div>
+          <div className="one" style={{ background: '#bdff70' }} />
+          <div className="two" style={{ background: '#f09bfd' }} />
+          <div className="three" style={{ background: '#ffa500' }} />
         </Slides>
       </section>
     </div>

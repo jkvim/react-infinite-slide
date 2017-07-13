@@ -6,5 +6,5 @@ export {
   Dots,
   Slides,
   ArrowLeft,
-  ArrowRight,
+  ArrowRight
 };
