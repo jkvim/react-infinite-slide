@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function Arrow({ direction, onClick }) {
   const style = {
@@ -23,13 +23,13 @@ function Arrow({ direction, onClick }) {
       margin: '0 auto',
       marginTop: '10px'
     }
-  };
+  }
   if (direction === 'left') {
-    style.wrapper.left = '0';
-    style.arrow.transform = 'rotate(-45deg)';
+    style.wrapper.left = '0'
+    style.arrow.transform = 'rotate(-45deg)'
   } else if (direction === 'right') {
-    style.wrapper.right = '0';
-    style.arrow.transform = 'rotate(135deg)';
+    style.wrapper.right = '0'
+    style.arrow.transform = 'rotate(135deg)'
   }
   return (
     <div className={`arrow-${direction}`} style={style.wrapper} onClick={onClick} >
@@ -38,19 +38,15 @@ function Arrow({ direction, onClick }) {
   )
 }
 
-const ArrowLeft = ({ onClick }) => {
-  return (
-    <Arrow direction="left" onClick={onClick} />
-  );
-}
+const ArrowLeft = ({ onClick }) => (
+  <Arrow direction="left" onClick={onClick} />
+)
 
-const ArrowRight = ({ onClick }) => {
-  return (
-    <Arrow direction="right" onClick={onClick} />
-  );
-}
+const ArrowRight = ({ onClick }) => (
+  <Arrow direction="right" onClick={onClick} />
+)
 
 export {
   ArrowLeft,
   ArrowRight
-};
+}
