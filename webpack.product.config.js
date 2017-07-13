@@ -1,30 +1,26 @@
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
-  entry: path.resolve(__dirname + '/src', 'index.jsx'),
+  entry: path.resolve(__dirname, 'src'),
   output: {
     filename: './react-infinite-slide.min.js',
-    libraryTarget: 'commonjs2'
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
+    libraryTarget: 'umd'
   },
   module: {
     loaders: [
       {
-        test: /\.jsx$/,
-        loader: 'babel',
+        test: /\.js$/,
+        loader: 'babel-loader'
       }
-    ],
-  },
-  externals: {
-    // Use external version of React
-    react: {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react'
-    },
-  },
-};
+    ]
+  }
+  // externals: {
+  //   // Use external version of React
+  //   react: {
+  //     root: 'React',
+  //     commonjs2: 'react',
+  //     commonjs: 'react',
+  //     amd: 'react'
+  //   }
+  // }
+}
