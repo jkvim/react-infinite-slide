@@ -63,7 +63,7 @@ describe('Dots', () => {
 });
 
 describe('Slides', () => {
-  it('should render <Slides /> compoent', () => {
+  it('should render <Slides /> component', () => {
     const slides = shallow(
       <Slides>
         <div className="slide-1" />
