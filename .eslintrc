@@ -6,10 +6,7 @@
   },
   "rules": {
      "indent": ["error", 2],
-     "no-unused-expressions": [0]
-  },
-  "globals": {
-    "describe": true,
-    "it": true
+     "no-unused-expressions": [0],
+     "semi": [0]
   }
 }
