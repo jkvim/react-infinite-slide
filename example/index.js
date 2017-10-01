@@ -6,36 +6,15 @@ import { ArrowLeft, ArrowRight, Dots, Slides } from '../src';
 
 function App () {
   return (
-    <div>
-      <header>
-        <GithubCorner href="https://github.com/jkvim/react-infinite-slide" />
-        <h1>React Infinite Slide</h1>
-      </header>
-      <section>
-        <h2>Slide By Arrow</h2>
-        <Slides arrowLeft={ArrowLeft}
-                arrowRight={ArrowRight}
-                dots={Dots}
-                duration={300}
-                width="100%">
-          <div className="one" style={{ background: '#bdff70' }} />
-          <div className="two" style={{ background: '#f09bfd' }} />
-          <div className="three" style={{ background: '#ffa500' }} />
-        </Slides>
-        <h2>Slide By Auto</h2>
-      </section>
-      <section>
-        <Slides dots={Dots}
-                duration={300}
-                width="100%"
-                autoplay
-                delay={2000}>
-          <div className="one" style={{ background: '#bdff70' }} />
-          <div className="two" style={{ background: '#f09bfd' }} />
-          <div className="three" style={{ background: '#ffa500' }} />
-        </Slides>
-      </section>
-    </div>
+    <section>
+      <h2>Slide By Arrow</h2>
+      <Slides>
+        <div className="one" style={{ background: '#bdff70', width: '500px', height: '300px' }} />
+        <div className="two" style={{ background: '#f09bfd', width: '500px', height: '300px' }} />
+        <div className="three" style={{ background: '#ffa500', width: '500px', height: '300px' }} />
+      </Slides>
+      <h2>Slide By Auto</h2>
+    </section>
   )
 }
 

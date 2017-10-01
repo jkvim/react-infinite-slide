@@ -1,19 +1,19 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 export default class Dots extends React.Component {
-  onClick(key) {
+  onClick (key) {
     return () => {
-
       if (typeof this.props.onClick === 'function' ||
         typeof this.props.onDotsClick === 'function') {
-        const onClick = this.props.onClick || this.props.onDotsClick;
-        onClick(key);
+        const onClick = this.props.onClick || this.props.onDotsClick
+        onClick(key)
       }
-    };
+    }
   }
 
-  getDots() {
-    const dots = [];
+  getDots () {
+    const dots = []
     for (let i = 0; i < this.props.length || 0; i++) {
       const style = {
         width: '5px',
@@ -23,24 +23,24 @@ export default class Dots extends React.Component {
         display: 'inline-block',
         background: 'rgba(0, 0, 0, 0.3)',
         padding: '2px'
-      };
+      }
 
       if (i === this.props.activeDot) {
-        style.background = '#FFFFFF';
+        style.background = '#FFFFFF'
       }
 
       dots.push(
         <li onClick={this.onClick(i)}
           style={style}
           key={i}
-          ></li>
-      );
+           />
+      )
     }
-    return dots;
+    return dots
   }
 
-  render() {
-    const dots = this.getDots();
+  render () {
+    const dots = this.getDots()
     const style = {
       zIndex: 2,
       left: '0',
@@ -50,8 +50,8 @@ export default class Dots extends React.Component {
       bottom: '10px',
       listStyle: 'none',
       textAlign: 'center',
-      position: 'absolute',
-    };
+      position: 'absolute'
+    }
     return (
       <ul style={style}>
         {dots}
@@ -61,6 +61,6 @@ export default class Dots extends React.Component {
 }
 
 Dots.propTypes = {
-  activeDot: React.PropTypes.number,
-  length: React.PropTypes.number,
-};
+  activeDot: PropTypes.number,
+  length: PropTypes.number
+}
