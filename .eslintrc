@@ -8,6 +8,7 @@
   "rules": {
      "indent": ["error", 2],
      "no-unused-expressions": [0],
-     "semi": ["error", "never"]
+     "semi": ["error", "never"],
+     "react/no-did-update-set-state": [0]
   }
 }

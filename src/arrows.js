@@ -33,7 +33,7 @@ function Arrow({ direction, onClick }) {
   }
   return (
     <div className={`arrow-${direction}`} style={style.wrapper} onClick={onClick} >
-      <div style={style.arrow}></div>
+      <div style={style.arrow} />
     </div>
   )
 }

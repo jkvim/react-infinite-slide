@@ -1,84 +1,168 @@
-import React, { Children } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { ArrowLeft, ArrowRight } from './arrows'
-// import AlloyFinger from 'alloyfinger';
-import { mapIndexToTop, mapIndexToBottom } from './utils'
-import Transition from 'react-transition-group/Transition'
-import TransitionGroup from 'react-transition-group/TransitionGroup'
+import throttle from 'lodash/throttle'
 
-const transitionStyle = {
-  display: 'flex',
-  transition: 'left 0.5s ease-in'
-}
+// import AlloyFinger from 'alloyfinger';
 
 export default class Slides extends React.Component {
+  static defaultProps = {
+    width: '500px',
+    height: '300px',
+    duration: 1000,
+    arrowLeft: null,
+    arrowRight: null,
+    dots: null,
+    delay: 1000
+  }
+
   constructor (props) {
     super(props)
     this.state = {
-      active: 0,
-      direction: 'left'
+      active: this.maxLength,
+      playAnimation: true
     }
   }
 
-  handleSlideToLeft = () => {
-    console.log('click left')
-    const { active } = this.state
-    this.setState({
-      active: active - 1
-    })
+  componentDidMount () {
+    if (this.props.autoplay) {
+      setInterval(() => {
+        this.navigationTo(1)
+      }, this.props.delay)
+    }
   }
 
-  handleSlideToRight = () => {
-    console.log('click right')
-    const { active } = this.state
+  componentDidUpdate (prevProps, prevState) {
+    // slide by arrow. from last to 1
+    if (this.state.active === 0 && prevState.active === this.maxLength) {
+      setTimeout(() => {
+        this.setState({
+          active: 1,
+          playAnimation: true
+        })
+      }, 0)
+      return
+    }
+    // slide by arrow, from 0 to maxLenth - 1
+    if (prevState.active === 0 && this.state.active === this.maxLength) {
+      setTimeout(() => {
+        this.setState({
+          active: this.maxLength - 1,
+          playAnimation: true
+        })
+      }, 0)
+    }
+  }
+
+  caculateActive = increment => this.state.active + increment
+
+  navigationTo = throttle(nextStep => {
+    let active = this.caculateActive(nextStep)
+    let playAnimation = true
+    if (active > this.maxLength) {
+      active = 0
+      playAnimation = false
+    }
+    if (active === -1) {
+      active = this.maxLength
+      playAnimation = false
+    }
     this.setState({
-      active: active + 1
+      active: active,
+      playAnimation: playAnimation
     })
+  }, this.props.duration + 100, { leading: true })
+
+  handleSlideToLeft = () => this.navigationTo(-1)
+
+  handleSlideToRight = () => this.navigationTo(1)
+
+  handleClickDots = (key) => {
+    const step = key - this.state.active
+    this.navigationTo(step)
+  }
+
+  get maxLength () {
+    return this.props.children.length
+  }
+
+  get atLast () {
+    const { active } = this.state
+    return active === this.maxLength || active === this.maxLength - 1
+  }
+
+  get activeDot () {
+    return this.state.active === this.maxLength ? 0 : this.state.active
+  }
+
+  sildeStyle = index => {
+    const position = this.atLast && index === 0 ? this.maxLength : index
+    return {
+      position: 'absolute',
+      left: `${position}00%`
+    }
+  }
+
+  wrapperStyle = () => {
+    const { active, playAnimation } = this.state
+    const { width, height, duration } = this.props
+    return {
+      left: 0,
+      transform: `translate(-${active}00%, 0)`,
+      transition: playAnimation ? `${duration}ms ease-in-out` : '',
+      height: height,
+      width: width
+    }
+  }
+
+  renderArrowLeft = () => {
+    const { arrowLeft } = this.props
+    return arrowLeft ? React.cloneElement(arrowLeft, {
+      onClick: this.handleSlideToLeft
+    }) : null
+  }
+
+  renderArrowRight = () => {
+    const { arrowRight } = this.props
+    return arrowRight ? React.cloneElement(arrowRight, {
+      onClick: this.handleSlideToRight
+    }) : null
+  }
+
+  renderDots = () => {
+    const { dots } = this.props
+    return dots ? React.cloneElement(dots, {
+      onClick: this.handleClickDots,
+      activeDot: this.activeDot
+    }) : null
+  }
+
+  renderSlides = () => {
+    const { children } = this.props
+    return React.Children
+      .map(children, (child, index) => (
+        React.cloneElement(child, {
+          style: {
+            ...child.props.style,
+            ...this.sildeStyle(index)
+          }
+        })
+      ))
   }
 
   render () {
-    const { children } = this.props
-    const { active } = this.state
-    const positiveSeq = Children.toArray(children)
-    const oppositeSeq = positiveSeq.reverse()
-    const positiveIndex = mapIndexToTop(active, positiveSeq.length - 1)
-    const oppositeIndex = mapIndexToBottom(active, positiveSeq.length - 1)
-    const positiveStyle = {
-      ...transitionStyle,
-      zIndex: 1,
-      left: positiveIndex === 0 ? 0 : `-${positiveIndex * 100}%`,
-      width: `${positiveSeq.length}00%`,
-      position: 'absolute'
-    }
-    const oppositeStyle = {
-      ...transitionStyle,
-      zIndex: 0,
-      left: oppositeIndex === 0 ? 0 : `-${oppositeIndex * 100}%`,
-      width: `${positiveSeq.length}00%`,
-      position: 'absolute'
-    }
-    const slidesStyle = {
-      width: '500px',
-      height: '300px',
-      overflow: 'hidden',
-      position: 'relative'
-    }
     const containerStyle = {
       position: 'relative',
-      display: 'inline-block'
+      display: 'inline-block',
+      overflow: 'hidden',
+      ...this.props.containerStyle
     }
 
     return (
       <div className="react-infinite-slides container" style={containerStyle}>
-        <ArrowLeft onClick={this.handleSlideToLeft} />
-        <ArrowRight onClick={this.handleSlideToRight} />
-        <div className="react-infinite-slides slides" style={slidesStyle}>
-          <div style={positiveStyle}>
-            {positiveSeq}
-          </div>
-          <div style={oppositeStyle}>
-            {oppositeSeq}
-          </div>
+        {this.renderArrowLeft()}
+        {this.renderArrowRight()}
+        <div className="react-infinite-slides slides" style={this.wrapperStyle()}>
+          {this.renderSlides()}
         </div>
       </div>
     )
@@ -86,13 +170,14 @@ export default class Slides extends React.Component {
 }
 
 Slides.propTypes = {
+  containerStyle: PropTypes.object,
   children: PropTypes.arrayOf(PropTypes.element),
   width: PropTypes.string,
   height: PropTypes.string,
   delay: PropTypes.number,
   duration: PropTypes.number,
   autoplay: PropTypes.bool,
-  arrowLeft: PropTypes.object,
-  arrowRight: PropTypes.object,
+  arrowLeft: PropTypes.element,
+  arrowRight: PropTypes.element,
   dots: PropTypes.object
 }

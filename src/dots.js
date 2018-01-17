@@ -3,13 +3,7 @@ import PropTypes from 'prop-types'
 
 export default class Dots extends React.Component {
   onClick (key) {
-    return () => {
-      if (typeof this.props.onClick === 'function' ||
-        typeof this.props.onDotsClick === 'function') {
-        const onClick = this.props.onClick || this.props.onDotsClick
-        onClick(key)
-      }
-    }
+    this.props.onClick && this.props.onClick(key)
   }
 
   getDots () {
@@ -30,10 +24,7 @@ export default class Dots extends React.Component {
       }
 
       dots.push(
-        <li onClick={this.onClick(i)}
-          style={style}
-          key={i}
-           />
+        <li onClick={() => this.onClick(i)} style={style} key={i} />
       )
     }
     return dots
