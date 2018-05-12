@@ -3,3 +3,4 @@ example/bundle.js
 *.min.js
 .publish
 .vscode
+*.log
