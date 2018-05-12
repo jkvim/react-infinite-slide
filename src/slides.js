@@ -32,7 +32,7 @@ export default class Slides extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    // slide by arrow. from last to 1
+    // slide by arrow. from maxLength to 1
     if (this.state.active === 0 && prevState.active === this.maxLength) {
       setTimeout(() => {
         this.setState({
@@ -70,7 +70,7 @@ export default class Slides extends React.Component {
       active: active,
       playAnimation: playAnimation
     })
-  }, this.props.duration + 100, { leading: true })
+  }, this.props.duration)
 
   handleSlideToLeft = () => this.navigationTo(-1)
 
