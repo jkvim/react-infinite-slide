@@ -3,15 +3,5 @@
     "es2015",
     "stage-1",
     "react"
-  ],
-  "env": {
-    "production": {
-      "plugins": []
-    },
-    "development": {
-      "plugins": [
-        "react-hot-loader/babel"
-      ]
-    }
-  }
+  ]
 }
