@@ -5,16 +5,6 @@ import throttle from 'lodash/throttle'
 // import AlloyFinger from 'alloyfinger';
 
 export default class Slides extends React.Component {
-  static defaultProps = {
-    width: '500px',
-    height: '300px',
-    duration: 1000,
-    arrowLeft: null,
-    arrowRight: null,
-    dots: null,
-    delay: 1000
-  }
-
   constructor (props) {
     super(props)
     this.state = {
@@ -76,11 +66,6 @@ export default class Slides extends React.Component {
 
   handleSlideToRight = () => this.navigationTo(1)
 
-  handleClickDots = (key) => {
-    const step = key - this.state.active
-    this.navigationTo(step)
-  }
-
   get maxLength () {
     return this.props.children.length
   }
@@ -131,7 +116,6 @@ export default class Slides extends React.Component {
   renderDots = () => {
     const { dots } = this.props
     return dots ? React.cloneElement(dots, {
-      onClick: this.handleClickDots,
       activeDot: this.activeDot
     }) : null
   }
@@ -180,4 +164,14 @@ Slides.propTypes = {
   arrowLeft: PropTypes.element,
   arrowRight: PropTypes.element,
   dots: PropTypes.object
+}
+
+Slides.defaultProps = {
+  width: '500px',
+  height: '300px',
+  duration: 1000,
+  arrowLeft: null,
+  arrowRight: null,
+  dots: null,
+  delay: 1000
 }
