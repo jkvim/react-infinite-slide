@@ -5,20 +5,9 @@ import throttle from 'lodash/throttle'
 // import AlloyFinger from 'alloyfinger';
 
 export default class Slides extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      active: this.maxLength,
-      playAnimation: true
-    }
-  }
-
-  componentDidMount () {
-    if (this.props.autoplay) {
-      setInterval(() => {
-        this.navigationTo(1)
-      }, this.props.delay)
-    }
+  state = {
+    active: this.maxLength,
+    playAnimation: true
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -160,7 +149,6 @@ Slides.propTypes = {
   height: PropTypes.string,
   delay: PropTypes.number,
   duration: PropTypes.number,
-  autoplay: PropTypes.bool,
   arrowLeft: PropTypes.element,
   arrowRight: PropTypes.element,
   dots: PropTypes.object
