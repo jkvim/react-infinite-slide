@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.develop.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.product.config.js -p",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.product.config.js",
+    "build:example": "cross-env NODE_ENV=production webpack --config webpack.example.config.js",
     "depoly": "gulp depoly",
     "prepublish": "npm run build",
     "test": "mocha --compilers js:babel-core/register  test/utils.spec.js"
@@ -58,8 +59,7 @@
     "style-loader": "^0.13.1",
     "webpack": "^4.8.2",
     "webpack-cli": "^2.1.3",
-    "webpack-dev-server": "^3.1.4",
-    "webpack-stream": "^4.0.3"
+    "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
     "alloyfinger": "^0.1.3",
