@@ -1,13 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import throttle from 'lodash/throttle'
+import { EventEmitter } from 'fbemitter'
 
 // import AlloyFinger from 'alloyfinger';
+const EVENT = {
+  NOTIFY_WOKER: 'NOTIFY_WOKER'
+}
 
 export default class Slides extends React.Component {
-  state = {
-    active: this.maxLength,
-    playAnimation: true
+  emitter = new EventEmitter();
+  animationQueue = []
+  playing = false
+  state = { active: this.maxLength, playAnimation: true }
+
+  componentDidMount() {
+    this.emitter.addListener(EVENT.NOTIFY_WOKER, this.getNextJob)
+  }
+
+  componentWillUnmount() {
+    this.emitter.removeAllListeners()
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -32,9 +44,17 @@ export default class Slides extends React.Component {
     }
   }
 
+  getNextJob = () => {
+    const nextStep = this.animationQueue.pop()
+    if (nextStep && !this.playing) {
+      this.playing = true
+      this.navigationTo(nextStep)
+    }
+  }
+
   caculateActive = increment => this.state.active + increment
 
-  navigationTo = throttle(nextStep => {
+  navigationTo = nextStep => {
     let active = this.caculateActive(nextStep)
     let playAnimation = true
     if (active > this.maxLength) {
@@ -49,11 +69,25 @@ export default class Slides extends React.Component {
       active: active,
       playAnimation: playAnimation
     })
-  }, this.props.duration)
+  }
 
-  handleSlideToLeft = () => this.navigationTo(-1)
+  pushToQueue = nextStep => {
+    this.animationQueue.push(nextStep)
+    this.notifyWorker()
+  }
 
-  handleSlideToRight = () => this.navigationTo(1)
+  notifyWorker = () => {
+    this.emitter.emit(EVENT.NOTIFY_WOKER)
+  }
+
+  handleSlideToLeft = () => this.pushToQueue(-1)
+
+  handleSlideToRight = () => this.pushToQueue(1)
+
+  handleTransitionEnd = () => {
+    this.playing = false
+    this.notifyWorker()
+  }
 
   get maxLength () {
     return this.props.children.length
@@ -62,10 +96,6 @@ export default class Slides extends React.Component {
   get atLast () {
     const { active } = this.state
     return active === this.maxLength || active === this.maxLength - 1
-  }
-
-  get activeDot () {
-    return this.state.active === this.maxLength ? 0 : this.state.active
   }
 
   sildeStyle = index => {
@@ -102,13 +132,6 @@ export default class Slides extends React.Component {
     }) : null
   }
 
-  renderDots = () => {
-    const { dots } = this.props
-    return dots ? React.cloneElement(dots, {
-      activeDot: this.activeDot
-    }) : null
-  }
-
   renderSlides = () => {
     const { children } = this.props
     return React.Children
@@ -134,7 +157,11 @@ export default class Slides extends React.Component {
       <div className="react-infinite-slides container" style={containerStyle}>
         {this.renderArrowLeft()}
         {this.renderArrowRight()}
-        <div className="react-infinite-slides slides" style={this.wrapperStyle()}>
+        <div
+          className="react-infinite-slides slides"
+          style={this.wrapperStyle()}
+          onTransitionEnd={this.handleTransitionEnd}
+        >
           {this.renderSlides()}
         </div>
       </div>
